@@ -39,3 +39,4 @@ void popB(stB *s);
 void printStackB(stB *s);
 
 void alert(char *type, char *msg);
+int ft_swap(int *a, int *b);

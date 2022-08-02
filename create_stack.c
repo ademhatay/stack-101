@@ -11,7 +11,7 @@ void load_stacks(stA *s, stB *s1)
 	pushA(s, 3);
 	pushA(s, 1);
 	pushA(s, 2);
-	popB(s1);
+	pushB(s1, 0);
 }
 
 void printStacks(stA *s, stB *s1)
@@ -28,7 +28,14 @@ int main()
 	init_stacks(s, s1);
 	load_stacks(s, s1);
 
-	printf("%d\n", s->count);
+	if (s->count == 3)
+	{
+		int tmp;
+
+		tmp = s ->top;
+		pushB(s1, tmp);
+		popA(s);
+	}
 
 	printStacks(s, s1);
 }
