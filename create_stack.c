@@ -1,95 +1,34 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "stack.h"
 
-# define MAX 10
-
- int count = 0;
-
-// creating a Stack
-
-struct stack {
-  int items[MAX];
-  int top;
-};
-typedef struct stack st;
-
-void createEmptyStack(st *s)
+void init_stacks(stA *s, stB *s1)
 {
-	s->top = -1;
+	createEmptyStackA(s);
+	createEmptyStackB(s1);
 }
 
-// check if the Stack is full
-int isFull(st *s)
+void load_stacks(stA *s, stB *s1)
 {
-	if (s->top == MAX - 1)
-		return (EXIT_FAILURE);
-	else
-		return (EXIT_SUCCESS);
+	pushA(s, 3);
+	pushA(s, 1);
+	pushA(s, 2);
+	popB(s1);
 }
 
-// check if the Stack empty
-int isEmpty(st *s)
+void printStacks(stA *s, stB *s1)
 {
-	if (s->top == -1)
-		return (1);
-	else
-		return (0);
-}
-
-
-// Add element into Stack
-void push(st *s, int newItem)
-{
-	if (isFull(s))
-		printf("STACK DOLU KARŞİMM!");
-	else
-	{
-		s->top++;
-		s->items[s->top] = newItem;
-		printf("ITEM EKLENDI => %d\n", newItem);
-	}
-	count++;
-}
-
-// Remove element from Stack
-void pop(st *s)
-{
-	if (isEmpty(s))
-		printf("STACK BOŞŞ KARŞİMM!");
-	else
-	{
-		printf("ITEM SİLİNDİ=> %d\n", s->items[s->top]);
-		s->top--;
-	}
-	count--;
-}
-
-// Print element of Stack
-
-void printStack(st *s) {
-  printf("Stack: ");
-  for (int i = 0; i < count; i++) {
-    printf("%d ", s->items[i]);
-  }
-  printf("\n");
+	printStackA(s);
+	printStackB(s1);
 }
 
 // Main 
-int main() {
-  int ch;
-  st *s = (st *)malloc(sizeof(st));
+int main() 
+{
+	stA *s = (stA *)malloc(sizeof(stA));
+	stB *s1 = (stB *)malloc(sizeof(stB));
+	init_stacks(s, s1);
+	load_stacks(s, s1);
 
-  createEmptyStack(s);
+	printf("%d\n", s->count);
 
-  push(s, 1);
-  push(s, 2);
-  push(s, 3);
-  push(s, 4);
-
-  printStack(s);
-
-  pop(s);
-
-  printf("\nSonuncu Kaldırıldıktan sonra Stack\n");
-  printStack(s);
+	printStacks(s, s1);
 }
